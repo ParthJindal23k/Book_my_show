@@ -1,7 +1,7 @@
 import React from 'react';
 import '../Css/SeatsInput.css';
 
-const SeatInput = ({key,text,noOfSeats,changeNoOfSeats}) => {
+const SeatInput = ({seat,index,changeSeats,text,noOfSeats,changeNoOfSeats}) => {
 
   const change_seats = (e) =>{
    changeNoOfSeats({...noOfSeats,[e.target.name]:Number(e.target.value)}) 
@@ -17,12 +17,35 @@ const SeatInput = ({key,text,noOfSeats,changeNoOfSeats}) => {
 
   }
 
+
+  const handleChecked = (text) =>{
+    change_seats(text);
+  }
+
   return (
-    <div className='form-check-label'>
-        <span className='text'>{text}</span>
-        <input type='number' className='seats-input' placeholder='0' max="30" min= "0" name = {text} onChange={change_seats} value={noOfSeats[text]}  />
+    <div
+      name={text}
+      className={`form-check-label seats ${
+        seat === text ? "active" : "inactive"
+      }`}
+      id={`${index}text`}
+      onClick={() => {
+        handleChecked(text, index);
+      }}>
+      <span className={"text"}>{text}</span>
+      <input
+        type="number"
+        className="seats-input"
+        placeholder="0"
+        name={text}
+        min="0"
+        id={`${index}input`}
+        max="30"
+        onChange={change_seats} 
+        value={noOfSeats[text]}
+      />
     </div>
-  )
+  );
 }
 
 export default SeatInput;

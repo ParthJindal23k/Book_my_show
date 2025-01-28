@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import SeatInput from './SeatInput'
 import { seats } from '../data'
 import '../Css/SelectSeats.css'
@@ -6,6 +6,7 @@ import BsContext from '../Context/BsContext'
 
 const SelectSeats = () => {
 
+  const [seat, changeSeats] = useState([]);
   const context = useContext(BsContext);
   const {noOfSeats,changeNoOfSeats} = context;
 
@@ -16,7 +17,7 @@ const SelectSeats = () => {
         <div className='SS_main_container'>
             {seats.map((el,index) =>{
                 return(
-                    <SeatInput key = {index} text = {el} noOfSeats = {noOfSeats} changeNoOfSeats = {changeNoOfSeats}  />
+                    <SeatInput seat = {seat} key = {index} index={index} text = {el} changeSeats={changeSeats} noOfSeats = {noOfSeats} changeNoOfSeats = {changeNoOfSeats}  />
                 )
             })}
         </div>

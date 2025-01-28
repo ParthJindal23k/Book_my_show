@@ -10,9 +10,9 @@ router.use(express.json());
 router.use(cors());
 
 router.post("/booking", async(req,res) =>{
-    const {movie,slots,seats} = req.body;
+    const {movie,slot,seats} = req.body;
     try {
-        const myData = new Ticket({movie,slots,seats})
+        const myData = new Ticket({movie,slot,seats})
 
         const saved = await myData.save();
         res.status(200).json({data:myData,message:"Booking Succesful!"})
@@ -33,7 +33,7 @@ router.get("/booking", async(req,res) =>{
             res.status(200).json({data:null,message:"No previous Booking found"})
         }
         else{
-            res.status(200).json(data:myData[0]);
+            res.status(200).json({data : myData[0]});
         }
 
     } catch (error) {
